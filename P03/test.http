@@ -1,0 +1,11 @@
+###Ruta /:
+GET http://localhost:3000/
+
+###Ruta Home:
+GET http://localhost:3000/home.html
+
+###Ruta Task:
+GET http://localhost:3000/login.html
+
+###Ruta Home:
+GET http://localhost:3000/tasks.html
