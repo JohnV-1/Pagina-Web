@@ -1,0 +1,87 @@
+.bodyLogin {
+    background: linear-gradient(to bottom right, #5C2A80, black);
+}
+
+.btn_1 {
+    margin-top: 10px;
+}
+
+.tarjeta {
+    background-color: #4c4653;
+}
+
+.fondo {
+    background: linear-gradient(to right, #5C2A80, black);
+}
+
+a {
+    text-decoration: none;
+}
+
+#container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.card-img-top {
+    width: 100px;
+    height: 100px;
+    border-radius: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+    float: left;
+}
+
+.card {
+    height: 280px;
+    overflow-y: auto;
+    margin: 15px;
+    background-color: aliceblue;
+    color: black;
+}
+
+.titulo {
+    margin-top: 15px;
+    margin-left: 15px;
+    border-bottom: 1px solid gray;
+}
+
+input[type="checkbox"] {
+    height: 17px;
+    width: 17px;
+    accent-color: green;
+}
+
+.badgeT {
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 10px;
+}
+
+.fa-pen {
+    color: blue;
+    margin-left: 10px;
+}
+
+.fa-trash {
+    color: red;
+    margin-left: 10px;
+}
+
+.fa-tag {
+    color: green;
+    margin-left: 10px;
+}
+
+.btn2 {
+    background-color: green;
+    border-radius: 10px;
+    border-color: green;
+    height: 50px;
+    width: 50px;
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+}

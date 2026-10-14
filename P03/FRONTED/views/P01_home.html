@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
+
+<head>
+    <title>Home</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS v5.3.8 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous" />
+    <link rel="stylesheet" href="Estilos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <!-----------------------------Importacion de models-------------------------------------------------------->
+    <script src="/models/tag.js"></script>
+    <script src="/models/task.js"></script>
+    <script src="/models/user.js"></script>
+    <script src="/controllers/users_controller.js"></script>
+    <script src="/controllers/tags_controller.js"></script>
+    <script src="/controllers/tasks_controller.js"></script>
+    <script src="/test.js"></script>
+    <!------------------------------------------------------------------------------------->
+</head>
+
+<body class="fondo">
+    <header>
+        <!-- place navbar here -->
+        <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="P01_home.html">
+                    <img src="https://i.pinimg.com/736x/ac/13/74/ac137456b996efec340292a585eb6dc7.jpg" alt="Avatar Logo"
+                        style="width:40px;" class="rounded-pill">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapsibleNavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                    <a href="P01_tasks.html"><span class="navbar-text">Tareas</span></a>
+                    <div class="dropdown">
+                        <button type="button" class="btn btn dropdown-toggle" data-bs-toggle="dropdown">
+                            Etiquetas
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" onclick="alert('Diste click en Salud ')">Salud</a></li>
+                            <li><a class="dropdown-item" onclick="alert('Diste click en Proyectos ')">Proyectos</a></li>
+                            <li><a class="dropdown-item" onclick="alert('Diste click en Higiene ')">Higiene</a></li>
+                            <li><a class="dropdown-item" onclick="alert('Diste click en Trabajo ')">Trabajo</a></li>
+                            <li><button type="button" class="btn" data-bs-toggle="modal"
+                                    data-bs-target="#modalEtiqueta"><i class='fas fa-plus'
+                                        style='font-size:14px'></i>Nueva etiqueta</button></li>
+
+
+                        </ul>
+                    </div>
+                    <form class="d-flex ms-auto">
+                        <input type="search" class="form-control me-2" placeholder="Buscar">
+                        <button type="button" class="btn btn-outline-success">Buscar</button>
+                    </form>
+
+                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#myModal">
+                        <i class='fas fa-sign-out-alt'
+                            style='font-size:24px;color:white; cursor: pointer;margin-left: 10px; margin-right: 10px;'
+                            title="Cerrar Sesión"></i>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <!--Codigo del Modal Para Cerrar Sesion-->
+        <div class="modal modal-sm" id="myModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Cerrar Sesión</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        ¿Esta seguro de querer cerrar la sesión?
+                    </div>
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <a href="P01_login.html">
+                            <button type="button" class="btn btn-danger">Aceptar</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Codigo del Modal de etiqueta-->
+        <div class="modal modal-sm" id="modalEtiqueta">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Nueva Etiqueta</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <form>
+                            Nombre
+                            <br>
+                            <input type="text" class="form-control" placeholder="Deporte" required>
+                            <br>
+                            Color
+                            <br>
+                            <input type="color" class="form-control" required>
+                            <br>
+                        </form>
+                    </div>
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-primary"
+                            onclick="alert('Etiqueta creada con exito ')">Crear Etiqueta</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Resumen de Usuario, Tareas de hoy, Tareas
+pendientes por etiqueta y Tareas Terminadas.-->
+        <div id="container">
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    <div class="card">
+                        <h5 class="titulo">Resumen Usuario</h5>
+                        <div>
+                            <img class="card-img-top"
+                                src="https://i.pinimg.com/736x/ad/95/93/ad9593d4e16ce6b64b6a2fd08aff1441.jpg"
+                                alt="Card image">
+                            <p>
+                                <strong>John Villa</strong><br>
+                                <strong>Tareas terminadas hoy:</strong> 67 tareas <br>
+                                <strong>Tareas pendientes de hoy:</strong> 13 tareas
+                            </p>
+                        </div>
+                        <div class="card-body">
+                            <p>
+                                <strong>AI Resume:</strong><br>
+                                Para entender la historia de Five Nights at Freddy's hay que olvidarse que estos son
+                                juegos y quiero que tomen realmente a esta saga como lo que es.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="card">
+                        <h5 class="titulo">Tareas de hoy</h5>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-primary">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col"><i class="fa-solid fa-check"></i></th>
+                                            <th scope="col">Tarea</th>
+                                            <th scope="col">Etiqueta</th>
+                                            <th scope="col">Fecha</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><input type="checkbox"></td>
+                                            <td>¿Que dijo Bob</td>
+                                            <td><span class="badge bg-primary">Salud</span></td>
+                                            <td>07/09/2026</td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="checkbox"></td>
+                                            <td>el constructor</td>
+                                            <td><span class="badge bg-secondary">Trabajo</span></td>
+                                            <td>08/09/2026</td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="checkbox"></td>
+                                            <td>cuando perdio</td>
+                                            <td><span class="badge bg-success">Higiene</span></td>
+                                            <td>09/09/2026</td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="checkbox"></td>
+                                            <td>su camion?</td>
+                                            <td><span class="badge bg-danger">Pendientes</span></td>
+                                            <td>10/09/2026</td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="checkbox"></td>
+                                            <td>Dijo: Y mi camion</td>
+                                            <td><span class="badge bg-warning">Proyectos</span></td>
+                                            <td>11/09/2026</td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="checkbox"></td>
+                                            <td>ajksjaksjkajskajsk</td>
+                                            <td><span class="badge bg-info">Comercio</span></td>
+                                            <td>12/09/2026</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="card">
+                        <h5 class="titulo">Tareas
+                            pendientes por etiqueta</h5>
+
+                        <div id="container">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div>
+                                        <span class="badge bg-info badgeT">Proyectos</span>
+                                        <span class="badge bg-warning badgeT" style="opacity: 0.5;">Higiene</span>
+                                        <span class="badge bg-primary badgeT">Comercio</span>
+                                        <span class="badge bg-success badgeT" style="opacity: 0.5;">Salud</span>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-warning">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col"><i class="fa-solid fa-check"></i></th>
+                                            <th scope="col">Tarea</th>
+                                            <th scope="col">Etiqueta</th>
+                                            <th scope="col">Fecha</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><input type="checkbox"></td>
+                                            <td>No soy gay</td>
+                                            <td><span class="badge bg-primary">Salud</span></td>
+                                            <td>07/09/2026</td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="checkbox"></td>
+                                            <td>pero soy peruano</td>
+                                            <td><span class="badge bg-secondary">Trabajo</span></td>
+                                            <td>08/09/2026</td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="checkbox"></td>
+                                            <td>y tengo una fantasia</td>
+                                            <td><span class="badge bg-success">Higiene</span></td>
+                                            <td>09/09/2026</td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="checkbox"></td>
+                                            <td>donde Peru invade Chile </td>
+                                            <td><span class="badge bg-danger">Pendientes</span></td>
+                                            <td>10/09/2026</td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="checkbox"></td>
+                                            <td>y Chile tiene que exportar </td>
+                                            <td><span class="badge bg-warning">Proyectos</span></td>
+                                            <td>11/09/2026</td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="checkbox"></td>
+                                            <td>esclavos femboys</td>
+                                            <td><span class="badge bg-info">Comercio</span></td>
+                                            <td>12/09/2026</td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="checkbox"></td>
+                                            <td>para satisfacer a oficiales peruanos</td>
+                                            <td><span class="badge bg-success">Proyectos</span></td>
+                                            <td>12/09/2026</td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="checkbox"></td>
+                                            <td>de alto rango </td>
+                                            <td><span class="badge bg-warning">Higiene</span></td>
+                                            <td>12/09/2026</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="card">
+                        <h5 class="titulo">Tareas Terminadas</h5>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-Dark">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col"><i class="fa-solid fa-check"></i></th>
+                                            <th scope="col">Tarea</th>
+                                            <th scope="col">Etiqueta</th>
+                                            <th scope="col">Fecha</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><input type="checkbox" checked></td>
+                                            <td><del> Sumergirse en su propia miseria.</del></td>
+                                            <td><span class="badge bg-primary">Salud</span></td>
+                                            <td>07/09/2026</td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="checkbox" checked></td>
+                                            <td><del>Contemplar el abismo.</del></td>
+                                            <td><span class="badge bg-secondary">Trabajo</span></td>
+                                            <td>07/09/2026</td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="checkbox" checked></td>
+                                            <td><del>Danza-ejercicio.</del></td>
+                                            <td><span class="badge bg-success">Ejercicio</span></td>
+                                            <td>07/09/2026</td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="checkbox" checked></td>
+                                            <td><del>Cena consigo mismo</del></td>
+                                            <td><span class="badge bg-info">Higiene</span></td>
+                                            <td>07/09/2026</td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="checkbox" checked></td>
+                                            <td><del>Luchar con el odio que se tiene.</del></td>
+                                            <td><span class="badge bg-secondary">Proyectos</span></td>
+                                            <td>07/09/2026</td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="checkbox" checked></td>
+                                            <td><del> Recostarse, mirar al techo y deslizarse hacia la locura</del></td>
+                                            <td><span class="badge bg-warning">Pendientes</span></td>
+                                            <td>07/09/2026</td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+    </main>
+    <footer>
+        <!-- place footer here -->
+    </footer>
+    <!-- Bootstrap JavaScript Bundle (includes Popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
