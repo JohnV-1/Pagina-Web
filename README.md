@@ -1,7 +1,7 @@
 # P03 - Proyecto Web (Frontend y Backend)
 Proyecto desarrollado para la gestión de tareas, usuarios y etiquetas utilizando una arquitectura cliente-servidor.
 #  Estructura del Proyecto
-'''text
+```
 P03/
 ├── BACKEND/
 │   ├── controllers/
@@ -16,11 +16,11 @@ P03/
 │   ├── controllers/
 │   └── views/              # Archivos HTML (home, login, tasks)
 └── test.http               # Pruebas de peticiones HTTP
-'''
+```
 # Guía de Instalación y Ejecución
 * Clonar el repositorio
     - git clone https://github.com/JohnV-1/Pagina-Web.git
-    - cd "Pagina Web/P03/BACKEND"
+    - cd Pagina Web/P03/BACKEND
 * Instalar las dependencias
     - npm install
 * Iniciar el servidor
