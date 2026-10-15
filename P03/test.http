@@ -22,8 +22,13 @@ POST http://localhost:3000/users
 Content-Type: application/json 
 
 { 
-    "name": "Juan Perez", 
-    "email": "juan@prueba.com", 
-    "password": "Test123#1", 
-    "confirm_password": "Test123#1" 
+    "name": "Admin", 
+    "email": "Admin@admin.com", 
+    "password": "password", 
+    "confirm_password": "password" 
 }
+
+#-------PUNTO 2------- 
+### Consultar usuarios (Base de datos inicial): 
+GET http://localhost:3000/users?page=4&limit=2 
+x-auth: admin_auth
