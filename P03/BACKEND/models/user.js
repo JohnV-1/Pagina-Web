@@ -1,5 +1,9 @@
+const fs = require('fs');
+let users = JSON.parse(fs.readFileSync('./database/users.json'));
+
+
 function getNextUserID() {
-    return data.users.length
+    return users.length + 1;
 }
 class UserException {
     constructor(errorMessage) {
@@ -50,7 +54,7 @@ class User {
         } else {
             //this.#email = value;
 
-            if (data.users.findIndex(item => item.email == value) == -1) {
+            if (users.findIndex(item => item.email == value) == -1) {
                 this.#email = value;
             } else {
                 throw new UserException("El email no se puede repetir")
@@ -63,10 +67,27 @@ class User {
         if (value == "" || str.length < 8) {
             throw new UserException("La contraseña no puede estar vacia y debe de tener al menos 8 caracteres")
         } else {
-            this.#password = value;
+            if (users.findIndex(item => item.password == value) == -1) {
+                this.#password = value;
+            } else {
+                throw new UserException("Las contraseñas no se puede repetir")
+
+            }
         }
     }
     set joined_at(value) {
         throw new UserException("No se puede modificar este se genera con la fecha actual")
     }
+    toObj() {
+        return {
+            id: this.id,
+            name: this.name,
+            email: this.email,
+            password: this.password,
+            joined_at: this.joined_at
+
+        };
+    }
 }
+module.exports = User;
+

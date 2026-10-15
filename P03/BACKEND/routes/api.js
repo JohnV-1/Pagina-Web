@@ -2,6 +2,9 @@ const express = require('express');
 const path = require('path');
 
 const routerApi = express.Router();
+const usersRoutes = require('./users');
+
+routerApi.use('/users',usersRoutes);
 
 //Middleware
 function verificacion(req, res, next) {

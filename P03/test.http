@@ -15,3 +15,15 @@ GET http://localhost:3000/login.html
 ###Ruta Home:
 GET http://localhost:3000/tasks.html
 x-auth: Pas123
+
+#-------PUNTO 3------- 
+### Crear Usuario 1: 
+POST http://localhost:3000/users 
+Content-Type: application/json 
+
+{ 
+    "name": "Juan Perez", 
+    "email": "juan@prueba.com", 
+    "password": "Test123#1", 
+    "confirm_password": "Test123#1" 
+}

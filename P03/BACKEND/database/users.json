@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "name": "Juan Perez",
+    "email": "juan@prueba.com",
+    "password": "Test123#1",
+    "joined_at": "2026-10-15T22:02:30.127Z"
+  },
+  {
+    "id": 2,
+    "name": "Juan Perez",
+    "email": "john@prueba.com",
+    "password": "Test1223#1",
+    "joined_at": "2026-10-15T22:03:01.114Z"
+  }
+]
