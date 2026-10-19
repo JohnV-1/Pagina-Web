@@ -1,1 +1,34 @@
-[]
+[
+  {
+    "id": 1,
+    "title": "Hacer la practica 3",
+    "due_date": "2026-10-25",
+    "status": "A",
+    "tags": [
+      "escuela",
+      "backend"
+    ],
+    "id_user": 2
+  },
+  {
+    "id": 2,
+    "title": "Hacer la practica 3",
+    "due_date": "2026-10-25",
+    "status": "A",
+    "tags": [
+      "escuela",
+      "backend"
+    ],
+    "id_user": 2
+  },
+  {
+    "id": 3,
+    "title": "Estudiar para el examen",
+    "due_date": "2026-10-28",
+    "status": "A",
+    "tags": [
+      "estudio"
+    ],
+    "id_user": 2
+  }
+]

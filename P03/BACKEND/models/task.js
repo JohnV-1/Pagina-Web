@@ -1,26 +1,33 @@
+const fs = require('fs');
+
 function getNextTaskID() {
-    return data.tasks.length
+    let tasks = JSON.parse(fs.readFileSync('./database/tasks.json'));
+    return tasks.length + 1;
 }
+
 class TaskException {
     constructor(errorMessage) {
         this.errorMessage = errorMessage;
     }
 }
+
 class Task {
     #id;
     #title;
     #due_date;
-    #owner;
+    #id_user;
     #status;
     #tags;
-    constructor(title, due_date, owner, status, tags) {
+
+    constructor(title, due_date, id_user, status, tags) {
         this.#id = getNextTaskID();
         this.title = title;
         this.due_date = due_date;
-        this.owner = owner;
+        this.id_user = id_user;
         this.status = status;
         this.tags = tags;
     }
+
     get id() {
         return this.#id;
     }
@@ -30,56 +37,71 @@ class Task {
     get due_date() {
         return this.#due_date;
     }
-    get owner() {
-        return this.#owner;
+    get id_user() {
+        return this.#id_user;
     }
-    get static() {
+    get status() {
         return this.#status;
     }
     get tags() {
         return this.#tags;
     }
+
     set id(value) {
-        throw new TagException("Ta mal el Id se genera solo")
+        throw new TaskException("El ID se genera automáticamente");
     }
+
     set title(value) {
-        if (value == "") {
-            throw new TagException("El titulo no puede estar vacio")
-        } else {
-            this.#title = value;
+        if (!value || value.trim() === "") {
+            throw new TaskException("El título no puede estar vacío");
         }
+        this.#title = value;
     }
+
     set due_date(value) {
         const fecha = new Date(value);
         if (!isNaN(fecha.getTime())) {
             this.#due_date = value;
         } else {
-            throw new TagException("El formato de fecha debe ser aceptado por new Date()")
+            throw new TaskException("El formato de fecha debe ser aceptado por new Date()");
         }
     }
-    set owner(value) {
 
-        if (data.users.findIndex(item => item.id == value) !== -1) {
-            this.#owner = value;
+    set id_user(value) {
+        let users = JSON.parse(fs.readFileSync('./database/users.json'));
+        if (users.findIndex(item => item.id == value) !== -1) {
+            this.#id_user = value;
         } else {
-            throw new UserException("El ID de usuario asignado como owner no existe.");
+            throw new TaskException("El ID de usuario asignado como owner no existe.");
         }
     }
+
     set status(value) {
-        if (value == "A" || value == "F" || value == "C") {
+        if (value === "A" || value === "F" || value === "C") {
             this.#status = value;
         } else {
-            throw new TagException("El formato debe de se A/F/C")
-
+            throw new TaskException("El formato de estatus debe ser A/F/C");
         }
     }
+
     set tags(value) {
         if (Array.isArray(value)) {
             this.#tags = value;
         } else {
-            throw new TagException("El tag debe de ser un arreglo")
-
+            throw new TaskException("El tag debe de ser un arreglo");
         }
     }
+
+    toObj() {
+        return {
+            id: this.id,
+            title: this.title,
+            due_date: this.due_date,
+            status: this.status,
+            tags: this.tags,
+            id_user: this.id_user
+        };
+    }
 }
-console.log("Todo jalando al 100 viejon desde task")
+
+module.exports = Task;

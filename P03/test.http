@@ -38,9 +38,9 @@ GET http://localhost:3000/users/1
 x-auth: Test123#1
 
 ### Editar usuario 
-PATCH http://localhost:3000/users/9
+PATCH http://localhost:3000/users/2
 Content-Type: application/json 
-x-auth: Test123#1 
+x-auth: Test12231 
 
 { 
     "name": "JONzsgszgzsg" 
@@ -48,3 +48,69 @@ x-auth: Test123#1
 ###DElETE
 DELETE http://localhost:3000/users/9
 x-auth: contra56789
+
+#-------PUNTO 8-------
+### Crear Tarea 1 (Usuario ID = 2):
+POST http://localhost:3000/tasks
+Content-Type: application/json
+x-auth: Test12231
+
+{
+  "title": "Hacer la practica 3",
+  "due_date": "2026-10-25",
+  "status": "A",
+  "tags": ["escuela", "backend"]
+}
+
+### Crear Tarea 2 (Usuario ID = 2):
+POST http://localhost:3000/tasks
+Content-Type: application/json
+x-auth: Test12231
+
+{
+  "title": "Estudiar para el examen",
+  "due_date": "2026-10-28",
+  "status": "A",
+  "tags": ["estudio"]
+}
+
+### Crear Tarea 3 (Usuario ID = 2):
+POST http://localhost:3000/tasks
+Content-Type: application/json
+x-auth: Test123#2
+
+{
+  "title": "Comprar despensa",
+  "due_date": "2026-10-20",
+  "status": "completed",
+  "tags": ["hogar"]
+}
+
+#-------PUNTO 9-------
+### Consultar Tarea con ID = 1:
+GET http://localhost:3000/tasks/
+x-auth: Test12231
+
+#-------PUNTO 10-------
+### Consultar Tareas Paginadas (Página 2, Límite 1 - Usuario ID = 2):
+GET http://localhost:3000/tasks?page=2&limit=1
+x-auth: Test123#2
+
+#-------PUNTO 11-------
+### Edita Tarea con ID = 3:
+PATCH http://localhost:3000/tasks/3
+Content-Type: application/json
+x-auth: Test123#2
+
+{
+  "status": "pending"
+}
+
+#-------PUNTO 12-------
+### Elimina Tarea con ID = 1:
+DELETE http://localhost:3000/tasks/1
+x-auth: Test123#2
+
+### Corroborar lista de tareas tras la eliminación (limit=10):
+GET http://localhost:3000/tasks?page=1&limit=10
+x-auth: Test123#2
