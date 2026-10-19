@@ -1,12 +1,5 @@
 [
   {
-    "id": 1,
-    "name": "Juan Perez",
-    "email": "juan@prueba.com",
-    "password": "Test123#1",
-    "joined_at": "2026-10-15T22:02:30.127Z"
-  },
-  {
     "id": 2,
     "name": "Juan Perez",
     "email": "john@prueba.com",
@@ -61,19 +54,5 @@
     "email": "johnDanielV@prueba.com",
     "password": "contra456789",
     "joined_at": "2026-10-15T22:09:09.236Z"
-  },
-  {
-    "id": 10,
-    "name": "John Daniel V",
-    "email": "johnDanielVi@prueba.com",
-    "password": "contra56789",
-    "joined_at": "2026-10-15T22:09:24.051Z"
-  },
-  {
-    "id": 11,
-    "name": "Admin",
-    "email": "Admin@admin.com",
-    "password": "password",
-    "joined_at": "2026-10-15T22:12:24.762Z"
   }
 ]

@@ -32,3 +32,19 @@ Content-Type: application/json
 ### Consultar usuarios (Base de datos inicial): 
 GET http://localhost:3000/users?page=4&limit=2 
 x-auth: admin_auth
+
+### Get single user:
+GET http://localhost:3000/users/1
+x-auth: Test123#1
+
+### Editar usuario 
+PATCH http://localhost:3000/users/9
+Content-Type: application/json 
+x-auth: Test123#1 
+
+{ 
+    "name": "JONzsgszgzsg" 
+}
+###DElETE
+DELETE http://localhost:3000/users/9
+x-auth: contra56789
