@@ -25,3 +25,6 @@ P03/
     - npm install
 * Iniciar el servidor
     - node server.js
+En el paquete de node viene instalado nodemon se recomienda correr el servidor con: 
+    -npx nodemon server.js
+De esta manera no se tiene que volver a correr el servidor con cada cambio
