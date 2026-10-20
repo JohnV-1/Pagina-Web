@@ -1,58 +1,16 @@
 [
   {
     "id": 2,
-    "name": "JONzsgszgzsg",
-    "email": "john@prueba.com",
-    "password": "Test12231",
-    "joined_at": "2026-10-15T22:03:01.114Z"
+    "name": "Daniel Velasquez",
+    "email": "daniel.velasquez@prueba.com",
+    "password": "password2",
+    "joined_at": "2026-10-20T04:58:04.145Z"
   },
   {
     "id": 3,
-    "name": "Juan Perez",
-    "email": "johnD@prueba.com",
-    "password": "contra123456",
-    "joined_at": "2026-10-15T22:06:42.107Z"
-  },
-  {
-    "id": 4,
-    "name": "John",
-    "email": "johnDa@prueba.com",
-    "password": "contra1234567",
-    "joined_at": "2026-10-15T22:08:04.236Z"
-  },
-  {
-    "id": 5,
-    "name": "JohnD",
-    "email": "johnDan@prueba.com",
-    "password": "contra12345678",
-    "joined_at": "2026-10-15T22:08:16.138Z"
-  },
-  {
-    "id": 6,
-    "name": "JohnDa",
-    "email": "johnDani@prueba.com",
-    "password": "contra123456789",
-    "joined_at": "2026-10-15T22:08:27.199Z"
-  },
-  {
-    "id": 7,
-    "name": "JohnDanie",
-    "email": "johnDanie@prueba.com",
-    "password": "contra23456789",
-    "joined_at": "2026-10-15T22:08:40.620Z"
-  },
-  {
-    "id": 8,
-    "name": "JohnDaniel",
-    "email": "johnDaniel@prueba.com",
-    "password": "contra3456789",
-    "joined_at": "2026-10-15T22:08:50.802Z"
-  },
-  {
-    "id": 9,
-    "name": "John Daniel",
-    "email": "johnDanielV@prueba.com",
-    "password": "contra456789",
-    "joined_at": "2026-10-15T22:09:09.236Z"
+    "name": "John Velasquez Completo",
+    "email": "john.velasquez@prueba.com",
+    "password": "password3",
+    "joined_at": "2026-10-20T04:58:06.108Z"
   }
 ]

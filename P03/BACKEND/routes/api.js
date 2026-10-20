@@ -4,11 +4,14 @@ const path = require('path');
 const routerApi = express.Router();
 const usersRoutes = require('./users');
 const tasksRoutes = require('./tasks');
+const tagsRoutes = require('./tags.js');
 
 routerApi.use('/users',usersRoutes);
 routerApi.use('/tasks',tasksRoutes);
 
 
+ routerApi.use('/tags', tagsRoutes);
+ 
 //Middleware
 function verificacion(req, res, next) {
     if (req.get("x-auth")) {

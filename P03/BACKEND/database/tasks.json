@@ -1,33 +1,21 @@
 [
   {
-    "id": 1,
-    "title": "Hacer la practica 3",
-    "due_date": "2026-10-25",
-    "status": "A",
-    "tags": [
-      "escuela",
-      "backend"
-    ],
-    "id_user": 2
-  },
-  {
     "id": 2,
-    "title": "Hacer la practica 3",
-    "due_date": "2026-10-25",
+    "title": "Diseñar BD JSON",
+    "due_date": "2026-10-28",
     "status": "A",
     "tags": [
-      "escuela",
-      "backend"
+      "database"
     ],
     "id_user": 2
   },
   {
     "id": 3,
-    "title": "Estudiar para el examen",
-    "due_date": "2026-10-28",
-    "status": "A",
+    "title": "Probar REST Client",
+    "due_date": "2026-10-30",
+    "status": "C",
     "tags": [
-      "estudio"
+      "testing"
     ],
     "id_user": 2
   }

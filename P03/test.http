@@ -1,116 +1,217 @@
-###Ruta /:
+#-------PUNTO 1-------
+### Ruta raíz con Auth:
 GET http://localhost:3000/
-x-auth: Pas123
-###Ruta /:
+x-auth: password1
+
+### Ruta raíz sin Auth:
 GET http://localhost:3000/
 
-
-###Ruta Home:
+### Ruta Home:
 GET http://localhost:3000/home.html
-x-auth: Pas123
+x-auth: password1
 
-###Ruta Task:
-GET http://localhost:3000/login.html
-
-###Ruta Home:
+### Ruta Tasks:
 GET http://localhost:3000/tasks.html
-x-auth: Pas123
+x-auth: password1
 
-#-------PUNTO 3------- 
-### Crear Usuario 1: 
-POST http://localhost:3000/users 
-Content-Type: application/json 
-
-{ 
-    "name": "Admin", 
-    "email": "Admin@admin.com", 
-    "password": "password", 
-    "confirm_password": "password" 
-}
-
-#-------PUNTO 2------- 
-### Consultar usuarios (Base de datos inicial): 
-GET http://localhost:3000/users?page=4&limit=2 
+#-------PUNTO 2-------
+### Consultar usuarios (Base de datos inicial vacía):
+GET http://localhost:3000/users?page=1&limit=3
 x-auth: admin_auth
 
-### Get single user:
-GET http://localhost:3000/users/1
-x-auth: Test123#1
+#-------PUNTO 3-------
+### Crear Usuario 1 (John Villa):
+POST http://localhost:3000/users
+Content-Type: application/json
 
-### Editar usuario 
-PATCH http://localhost:3000/users/2
-Content-Type: application/json 
-x-auth: Test12231 
-
-{ 
-    "name": "JONzsgszgzsg" 
+{
+  "name": "John Villa",
+  "email": "john.villa@prueba.com",
+  "password": "password1",
+  "confirm_password": "password1"
 }
-###DElETE
-DELETE http://localhost:3000/users/9
-x-auth: contra56789
+
+### Crear Usuario 2 (Daniel Velasquez):
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+  "name": "Daniel Velasquez",
+  "email": "daniel.velasquez@prueba.com",
+  "password": "password2",
+  "confirm_password": "password2"
+}
+
+### Crear Usuario 3 (John Velasquez):
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+  "name": "John Velasquez",
+  "email": "john.velasquez@prueba.com",
+  "password": "password3",
+  "confirm_password": "password3"
+}
+
+### Corroborar Tareas vacías:
+GET http://localhost:3000/tasks?page=1&limit=10
+x-auth: password2
+
+### Corroborar Etiquetas vacías:
+GET http://localhost:3000/tags?page=1&limit=10
+x-auth: password3
+
+#-------PUNTO 4-------
+### Consultar usuario con ID = 2:
+GET http://localhost:3000/users/2
+x-auth: password2
+
+#-------PUNTO 5-------
+### Consultar usuarios (Página 1, Límite 2):
+GET http://localhost:3000/users?page=1&limit=2
+x-auth: admin_auth
+
+#-------PUNTO 6-------
+### Edita usuario con ID = 3 (Nombre completo):
+PATCH http://localhost:3000/users/3
+Content-Type: application/json
+x-auth: password3
+
+{
+  "name": "John Velasquez Completo"
+}
+
+#-------PUNTO 7-------
+### Elimina usuario con ID = 1:
+DELETE http://localhost:3000/users/1
+x-auth: password1
+
+### Corroborar todos los usuarios tras la eliminación (limit=10):
+GET http://localhost:3000/users?page=1&limit=10
+x-auth: admin_auth
 
 #-------PUNTO 8-------
-### Crear Tarea 1 (Usuario ID = 2):
+### Crear Tarea 1 (para Usuario ID = 2):
 POST http://localhost:3000/tasks
 Content-Type: application/json
-x-auth: Test12231
+x-auth: password2
 
 {
-  "title": "Hacer la practica 3",
+  "title": "Aprender Express",
   "due_date": "2026-10-25",
   "status": "A",
-  "tags": ["escuela", "backend"]
+  "tags": ["backend"]
 }
 
-### Crear Tarea 2 (Usuario ID = 2):
+### Crear Tarea 2 (para Usuario ID = 2):
 POST http://localhost:3000/tasks
 Content-Type: application/json
-x-auth: Test12231
+x-auth: password2
 
 {
-  "title": "Estudiar para el examen",
+  "title": "Diseñar BD JSON",
   "due_date": "2026-10-28",
   "status": "A",
-  "tags": ["estudio"]
+  "tags": ["database"]
 }
 
-### Crear Tarea 3 (Usuario ID = 2):
+### Crear Tarea 3 (para Usuario ID = 2):
 POST http://localhost:3000/tasks
 Content-Type: application/json
-x-auth: Test123#2
+x-auth: password2
 
 {
-  "title": "Comprar despensa",
-  "due_date": "2026-10-20",
-  "status": "completed",
-  "tags": ["hogar"]
+  "title": "Probar REST Client",
+  "due_date": "2026-10-30",
+  "status": "A",
+  "tags": ["testing"]
 }
 
 #-------PUNTO 9-------
-### Consultar Tarea con ID = 1:
-GET http://localhost:3000/tasks/
-x-auth: Test12231
+### Consultar tarea con ID = 1:
+GET http://localhost:3000/tasks/1
+x-auth: password2
 
 #-------PUNTO 10-------
-### Consultar Tareas Paginadas (Página 2, Límite 1 - Usuario ID = 2):
+### Consultar tareas (Página 2, Límite 1 - Usuario ID = 2):
 GET http://localhost:3000/tasks?page=2&limit=1
-x-auth: Test123#2
+x-auth: password2
 
 #-------PUNTO 11-------
-### Edita Tarea con ID = 3:
+### Edita tarea con ID = 3:
 PATCH http://localhost:3000/tasks/3
 Content-Type: application/json
-x-auth: Test123#2
+x-auth: password2
 
 {
-  "status": "pending"
+  "status": "C"
 }
 
 #-------PUNTO 12-------
-### Elimina Tarea con ID = 1:
+### Elimina tarea con ID = 1:
 DELETE http://localhost:3000/tasks/1
-x-auth: Test123#2
+x-auth: password2
 
-### Corroborar lista de tareas tras la eliminación (limit=10):
+### Corroborar todas las tareas tras la eliminación (limit=10):
 GET http://localhost:3000/tasks?page=1&limit=10
-x-auth: Test123#2
+x-auth: password2
+
+#-------PUNTO 13-------
+### Crear Etiqueta 1 (para Usuario ID = 3):
+POST http://localhost:3000/tags
+Content-Type: application/json
+x-auth: password3
+
+{
+  "name": "Escuela",
+  "color": "#FF0000"
+}
+
+### Crear Etiqueta 2 (para Usuario ID = 3):
+POST http://localhost:3000/tags
+Content-Type: application/json
+x-auth: password3
+
+{
+  "name": "Trabajo",
+  "color": "#00FF00"
+}
+
+### Crear Etiqueta 3 (para Usuario ID = 3):
+POST http://localhost:3000/tags
+Content-Type: application/json
+x-auth: password3
+
+{
+  "name": "Proyecto",
+  "color": "#0000FF"
+}
+
+#-------PUNTO 14-------
+### Consultar etiqueta con ID = 2:
+GET http://localhost:3000/tags/3
+x-auth: password3
+
+#-------PUNTO 15-------
+### Consultar etiquetas (Página 1, Límite 3 - Usuario ID = 3):
+GET http://localhost:3000/tags?page=1&limit=3
+x-auth: password3
+
+#-------PUNTO 16-------
+### Edita etiqueta con ID = 2:
+PATCH http://localhost:3000/tags/2
+Content-Type: application/json
+x-auth: password3
+
+{
+  "color": "#FFFF00"
+}
+
+#-------PUNTO 17-------
+### Elimina etiqueta con ID = 1:
+DELETE http://localhost:3000/tags/1
+x-auth: password3
+
+### Corroborar todas las etiquetas tras la eliminación (limit=10):
+GET http://localhost:3000/tags?page=1&limit=10
+x-auth: password3
