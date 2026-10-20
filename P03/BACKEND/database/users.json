@@ -1,16 +1,1 @@
-[
-  {
-    "id": 2,
-    "name": "Daniel Velasquez",
-    "email": "daniel.velasquez@prueba.com",
-    "password": "password2",
-    "joined_at": "2026-10-20T04:58:04.145Z"
-  },
-  {
-    "id": 3,
-    "name": "John Velasquez Completo",
-    "email": "john.velasquez@prueba.com",
-    "password": "password3",
-    "joined_at": "2026-10-20T04:58:06.108Z"
-  }
-]
+[]

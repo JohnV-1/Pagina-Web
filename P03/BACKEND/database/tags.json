@@ -1,14 +1,1 @@
-[
-  {
-    "id": 2,
-    "name": "Trabajo",
-    "color": "#FFFF00",
-    "id_user": 3
-  },
-  {
-    "id": 3,
-    "name": "Proyecto",
-    "color": "#0000FF",
-    "id_user": 3
-  }
-]
+[]
