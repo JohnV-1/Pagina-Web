@@ -1,1 +1,9 @@
-[]
+[
+  {
+    "id": 1,
+    "name": "John Villa",
+    "email": "john.villa@prueba.com",
+    "password": "password1",
+    "joined_at": "2026-10-20T05:47:13.770Z"
+  }
+]
