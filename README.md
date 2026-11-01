@@ -20,7 +20,7 @@ P03/
 # Guía de Instalación y Ejecución
 * Clonar el repositorio
     - git clone https://github.com/JohnV-1/Pagina-Web.git
-    - cd Pagina Web/P03/BACKEND
+    - cd Pagina Web/P04/BACKEND
 * Instalar las dependencias
     - npm install
 * Iniciar el servidor
@@ -28,3 +28,5 @@ P03/
 En el paquete de node viene instalado nodemon se recomienda correr el servidor con: <br>
     -npx nodemon server.js<br>
 De esta manera no se tiene que volver a correr el servidor con cada cambio<br>
+
+Nota: el archivo test.http sirve para hacer pruebas en el servidor 
