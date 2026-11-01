@@ -5,13 +5,17 @@ const routerApi = express.Router();
 const usersRoutes = require('./users');
 const tasksRoutes = require('./tasks');
 const tagsRoutes = require('./tags.js');
+//Constante de controller 
+const usersController = require('../controllers/users_api_controller.js');
 
-routerApi.use('/users',usersRoutes);
-routerApi.use('/tasks',tasksRoutes);
+routerApi.use('/users', usersRoutes);
+routerApi.use('/tasks', tasksRoutes);
 
 
- routerApi.use('/tags', tagsRoutes);
- 
+routerApi.use('/tags', tagsRoutes);
+//ruta login
+routerApi.post('/login', usersController.login);
+
 //Middleware
 // function verificacion(req, res, next) { 
 //     if (req.get("x-auth")) {

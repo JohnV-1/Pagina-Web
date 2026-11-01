@@ -12,3 +12,8 @@ function toggleForms() {
     }
 }
 console.log("Todoa ta jalando al 100% viejon");
+function login() {
+    event.preventDefault();
+    debugger;
+}
+document.getElementById('formLogin').addEventListener('submit', login);

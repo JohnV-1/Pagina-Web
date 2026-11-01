@@ -58,7 +58,7 @@ exports.deleteUser = (req, res) => {
         let deletedUser = users.splice(index, 1);
         fs.writeFileSync('./database/users.json', JSON.stringify(users, null, 2));
         res.json({
-            message: 'Usuario con id: '+id_user+' eliminado',
+            message: 'Usuario con id: ' + id_user + ' eliminado',
             user: deletedUser
         });
     } catch (err) {
@@ -96,5 +96,14 @@ exports.getUsers = (req, res) => {
         res.json({ page: page, next_page: page + 1, limit: limit, total: users.length, data: paginatedUsers });
     } catch (err) {
         res.status(400).send(err.message);
+    }
+}
+exports.login = (req, res) => {
+    let data = req.body,
+        user = users.find(user => (user.email == data.email && user.password == data.password));
+    if (user) {
+        res.send(user);
+    } else {
+        res.sendStatus(401);
     }
 }
