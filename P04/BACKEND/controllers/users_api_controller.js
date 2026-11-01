@@ -99,6 +99,7 @@ exports.getUsers = (req, res) => {
     }
 }
 exports.login = (req, res) => {
+    
     let data = req.body,
         user = users.find(user => (user.email == data.email && user.password == data.password));
     if (user) {

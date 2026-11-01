@@ -1,3 +1,5 @@
+
+
 function toggleForms() {
     let form_login = document.getElementById('formLogin'),
         form_register = document.getElementById('formRegister');
@@ -14,6 +16,26 @@ function toggleForms() {
 console.log("Todoa ta jalando al 100% viejon");
 function login() {
     event.preventDefault();
-    debugger;
+    let data = new FormData(event.target);
+
+    fetch('/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(Object.fromEntries(data.entries()))
+    })
+        .then(response => {
+            if (!response.ok) alert("Correo y/o contraseña incorrectos");
+            return response.json();
+        })
+        .then(user => {
+            sessionStorage.setItem('user', JSON.stringify(user));
+            window.location.href = local_url + 'home.html';
+        })
+        .catch(err => {
+            console.log("Aqui trono");
+            console.error("Error de login: ", err);
+        })
 }
 document.getElementById('formLogin').addEventListener('submit', login);
