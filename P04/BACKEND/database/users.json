@@ -1,16 +1,9 @@
 [
   {
-    "id": 2,
-    "name": "Daniel Velasquez",
-    "email": "daniel.velasquez@prueba.com",
-    "password": "password2",
-    "joined_at": "2026-11-01T01:38:32.313Z"
-  },
-  {
-    "id": 3,
-    "name": "John Daniel Villa Velasquez ",
-    "email": "john.velasquez@prueba.com",
-    "password": "password3",
-    "joined_at": "2026-11-01T01:38:34.880Z"
+    "id": 1,
+    "name": "admin",
+    "email": "admin@gmail.com",
+    "password": "admin12345678",
+    "joined_at": "2026-11-01T05:04:18.044Z"
   }
 ]
