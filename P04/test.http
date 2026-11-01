@@ -1,4 +1,14 @@
 #-------PUNTO 1-------
+### Ruta login
+POST http://localhost:3000/login 
+Content-Type: application/json 
+
+{ 
+  "email": "admin@gmail.com",
+   "password": "admin12345678" 
+}
+
+#-------PUNTO 1-------
 ### Ruta raíz con Auth:
 GET http://localhost:3000/
 x-auth: password1
