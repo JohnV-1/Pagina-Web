@@ -5,5 +5,12 @@
     "email": "admin@gmail.com",
     "password": "admin12345678",
     "joined_at": "2026-11-01T05:04:18.044Z"
+  },
+  {
+    "id": 2,
+    "name": "Daniel Velasquez",
+    "email": "daniel.velasquez@prueba.com",
+    "password": "password2",
+    "joined_at": "2026-11-01T06:00:06.837Z"
   }
 ]

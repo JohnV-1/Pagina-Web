@@ -13,16 +13,16 @@ routerApi.use('/tasks',tasksRoutes);
  routerApi.use('/tags', tagsRoutes);
  
 //Middleware
-function verificacion(req, res, next) {
-    if (req.get("x-auth")) {
-        next();
-    } else {
-        res.sendStatus(401);
-    }
-}
+// function verificacion(req, res, next) { 
+//     if (req.get("x-auth")) {
+//         next();
+//     } else {
+//         res.sendStatus(401);
+//     }
+// }
 
-routerApi.get('/home.html', verificacion);
-routerApi.get('/tasks.html', verificacion);
+// routerApi.get('/home.html', verificacion);
+// routerApi.get('/tasks.html', verificacion);
 
 
 routerApi.get('/', (req, res) => {
