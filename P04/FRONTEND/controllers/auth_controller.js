@@ -55,8 +55,16 @@ function register() {
         },
         body: JSON.stringify(Object.fromEntries(data.entries()))
     })
-        .then(response => {
-            if (!response.ok) alert("las contraseñas no coinciden");
+        // .then(response => {
+        //     if (!response.ok) alert("hOLA");
+        //     return response.json();
+        // })
+        .then(async response => {
+            if (!response.ok) {
+                let errrorText = await response.text();
+                alert(errrorText);
+                return response.json();
+            }
             return response.json();
         })
         .then(user => {
@@ -68,5 +76,18 @@ function register() {
             console.error("Error de login: ", err);
         })
 }
-document.getElementById('formLogin').addEventListener('submit', login);
-document.getElementById('formRegister').addEventListener('submit', register);
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    let formRegister = document.getElementById('formRegister');
+    let formLogin = document.getElementById('formLogin');
+    // Verificar si existen los formularios en la página actual antes de agregar eventos 
+    if (formRegister) {
+        formRegister.addEventListener('submit', register);
+    }
+    if (formLogin) {
+        formLogin.addEventListener('submit', login);
+    }
+
+
+});
