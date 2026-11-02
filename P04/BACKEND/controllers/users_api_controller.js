@@ -76,7 +76,7 @@ exports.registerUser = (req, res) => {
             let new_user = new User(req.body.name, req.body.email, req.body.password);
             users.push(new_user.toObj());
             fs.writeFileSync('./database/users.json', JSON.stringify(users, null, 2));
-            res.send("Usuarios agregado");
+            res.send(new_user.toObj());
         }
     } catch (err) {
         res.status(400).send(err.errorMessage);

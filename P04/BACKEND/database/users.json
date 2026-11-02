@@ -11,6 +11,13 @@
     "name": "Daniel Velasquez",
     "email": "daniel.velasquez@prueba.com",
     "password": "password2",
-    "joined_at": "2026-11-01T06:00:06.837Z"
+    "joined_at": "2026-11-02T20:03:56.324Z"
+  },
+  {
+    "id": 3,
+    "name": "John Velasquez",
+    "email": "john.velasquez@prueba.com",
+    "password": "password3",
+    "joined_at": "2026-11-02T20:03:59.567Z"
   }
 ]
