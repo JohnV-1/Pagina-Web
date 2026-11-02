@@ -39,3 +39,8 @@ function login() {
         })
 }
 document.getElementById('formLogin').addEventListener('submit', login);
+
+function logout() {
+    sessionStorage.clear();
+    window.location.href = local_url;
+}

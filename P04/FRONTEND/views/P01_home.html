@@ -87,9 +87,9 @@
                     <!-- Modal footer -->
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <a href="P01_login.html">
-                            <button type="button" class="btn btn-danger">Aceptar</button>
-                        </a>
+
+                        <button type="button" class="btn btn-danger" onClick="logout()">Aceptar</button>
+
                     </div>
                 </div>
             </div>
@@ -363,6 +363,10 @@ pendientes por etiqueta y Tareas Terminadas.-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
+    <script src="../controllers/env.js"></script>
+    <script src="../controllers/auth_controller.js"></script>
+    <script src="../controllers/tasks_controller.js"></script>
+    <script src="../controllers/tags_controller.js"></script>
 </body>
 
 </html>
