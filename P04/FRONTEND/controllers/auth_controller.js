@@ -38,9 +38,35 @@ function login() {
             console.error("Error de login: ", err);
         })
 }
-document.getElementById('formLogin').addEventListener('submit', login);
+
 
 function logout() {
     sessionStorage.clear();
     window.location.href = local_url;
 }
+function register() {
+    event.preventDefault();
+    let data = new FormData(event.target);
+
+    fetch('/users', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(Object.fromEntries(data.entries()))
+    })
+        .then(response => {
+            if (!response.ok) alert("las contraseñas no coinciden");
+            return response.json();
+        })
+        .then(user => {
+            sessionStorage.setItem('user', JSON.stringify(user));
+            window.location.href = local_url + 'home.html';
+        })
+        .catch(err => {
+            console.log("Aqui trono");
+            console.error("Error de login: ", err);
+        })
+}
+document.getElementById('formLogin').addEventListener('submit', login);
+document.getElementById('formRegister').addEventListener('submit', register);

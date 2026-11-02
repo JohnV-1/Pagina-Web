@@ -19,5 +19,26 @@
     "email": "john.velasquez@prueba.com",
     "password": "password3",
     "joined_at": "2026-11-02T20:03:59.567Z"
+  },
+  {
+    "id": 4,
+    "name": "pepe",
+    "email": "pepe@gmail.com",
+    "password": "pepe123456",
+    "joined_at": "2026-11-02T20:23:31.356Z"
+  },
+  {
+    "id": 5,
+    "name": "John Villa",
+    "email": "john.villa@prueba.com",
+    "password": "password1",
+    "joined_at": "2026-11-02T20:25:29.684Z"
+  },
+  {
+    "id": 6,
+    "name": "PacoPapas",
+    "email": "pacopapas@gmail.com",
+    "password": "password1234",
+    "joined_at": "2026-11-02T20:26:57.891Z"
   }
 ]
