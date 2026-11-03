@@ -1,4 +1,4 @@
-
+// ===================== LOGIN / REGISTRO =====================
 
 function toggleForms() {
     let form_login = document.getElementById('formLogin'),
@@ -13,185 +13,145 @@ function toggleForms() {
         form_register.style.display = 'none';
     }
 }
-console.log("Todoa ta jalando al 100% viejon");
-function login() {
+
+function login(event) {
     event.preventDefault();
     let data = new FormData(event.target);
 
-    fetch('/login', {
+    fetch(local_url + 'login', {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(Object.fromEntries(data.entries()))
     })
         .then(response => {
-            if (!response.ok) alert("Correo y/o contraseña incorrectos");
+            if (!response.ok) {
+                alert("Correo y/o contraseña incorrectos");
+                return null; // el 401 no trae JSON, no intentamos parsearlo
+            }
             return response.json();
         })
         .then(user => {
+            if (!user) return;
             sessionStorage.setItem('user', JSON.stringify(user));
             window.location.href = local_url + 'home.html';
         })
-        .catch(err => {
-            console.log("Aqui trono");
-            console.error("Error de login: ", err);
-        })
+        .catch(err => console.error("Error en login: ", err));
 }
 
+function register(event) {
+    event.preventDefault();
+    let data = new FormData(event.target);
+
+    fetch(local_url + 'users', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(Object.fromEntries(data.entries()))
+    })
+        .then(async response => {
+            if (!response.ok) {
+                alert(await response.text() || "No se pudo crear el usuario");
+                return null;
+            }
+            return response.json();
+        })
+        .then(user => {
+            if (!user) return;
+            sessionStorage.setItem('user', JSON.stringify(user));
+            window.location.href = local_url + 'home.html';
+        })
+        .catch(err => console.error("Error en registro: ", err));
+}
 
 function logout() {
     sessionStorage.clear();
     window.location.href = local_url;
 }
-function register() {
-    event.preventDefault();
-    let data = new FormData(event.target);
 
-    fetch('/users', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(Object.fromEntries(data.entries()))
-    })
-        // .then(response => {
-        //     if (!response.ok) alert("hOLA");
-        //     return response.json();
-        // })
-        .then(async response => {
-            if (!response.ok) {
-                let errrorText = await response.text();
-                alert(errrorText);
-                return response.json();
-            }
-            return response.json();
-        })
-        .then(user => {
-            sessionStorage.setItem('user', JSON.stringify(user));
-            window.location.href = local_url + 'home.html';
-        })
-        .catch(err => {
-            console.log("Aqui trono");
-            console.error("Error de login: ", err);
-        })
-}
+// ===================== EDITAR / ELIMINAR USUARIO =====================
+
 function populateModal() {
-    document.getElementById("nombre").value = JSON.parse(sessionStorage.user).name;
-    document.getElementById("correo").value = JSON.parse(sessionStorage.user).email;
-    document.getElementById("contrasena").value = JSON.parse(sessionStorage.user).password;
-    console.log(JSON.parse(sessionStorage.user).id)
+    let user = getCurrentUser();
+    document.getElementById('name_field').value = user.name;
+    document.getElementById('email_field').value = user.email;
+    document.getElementById('password_field').value = user.password;
 }
-// function init() {
-//     if (!sessionStorage.user) return;
 
-//     const user = JSON.parse(sessionStorage.user);
-
-//     const userNameDisplay = document.getElementById('userNameWidget');
-
-//     if (userNameDisplay) {
-//         userNameDisplay.innerText = user.name;
-//     }
-// }
-function init() {
-    if (!sessionStorage.user) return;
-    let user = JSON.parse(sessionStorage.user);
-    
-    let userNameWidget = document.getElementById('userNameWidget');
-    if (userNameWidget) {
-        userNameWidget.innerText = user.name;
-    }
-    
-    if (typeof loadTagsDropdown === 'function') {
-        loadTagsDropdown();
-    }
-    
-    if (typeof populateTaskTagSelect === 'function') {
-        populateTaskTagSelect();
-    }
-    
-    if (typeof renderHomeWidgets === 'function') {
-        renderHomeWidgets();
-    }
-    
-    if (typeof renderTasksPage === 'function') {
-        renderTasksPage();
-    }
-}
-function actualizar() {
+function updateUser(event) {
     event.preventDefault();
-    let data = new FormData(event.target);
+    let user = getCurrentUser(),
+        data = new FormData(event.target);
 
-    fetch('/users/' + JSON.parse(sessionStorage.user).id, {
+    fetch(local_url + 'users/' + user.id, {
         method: 'PATCH',
-        headers: {
-            'Content-Type': 'application/json',
-            'x-auth': JSON.parse(sessionStorage.user).password
-        },
+        headers: authHeaders(true),
         body: JSON.stringify(Object.fromEntries(data.entries()))
     })
         .then(async response => {
             if (!response.ok) {
-                let errrorText = await response.text();
-                alert(errrorText);
-                return response.json();
+                alert(await response.text() || "No se pudo actualizar el usuario");
+                return null;
             }
             return response.json();
         })
         .then(res => {
-            if (res) {
-                const updatedUser = res.user || res;
-                sessionStorage.setItem('user', JSON.stringify(updatedUser));
-                alert("Información de usuario actualizada correctamente");
-
-                const modalElement = document.getElementById('edicion');
-                if (modalElement && window.bootstrap) {
-                    const modalInstance = bootstrap.Modal.getInstance(modalElement);
-                    if (modalInstance) modalInstance.hide();
-                }
-                init();
-            }
+            if (!res) return;
+            sessionStorage.setItem('user', JSON.stringify(res.user || res));
+            bootstrap.Modal.getOrCreateInstance(document.getElementById('modalEdit')).hide();
+            alert("Usuario actualizado correctamente");
+            init();
         })
-        .catch(err => {
-            console.log("Aqui trono");
-            console.error("Error al actualizar: ", err);
-        })
+        .catch(err => console.error("Error al actualizar usuario: ", err));
 }
-function eliminar() {
-    fetch('/users/' + JSON.parse(sessionStorage.user).id, {
+
+function deleteUser() {
+    let user = getCurrentUser();
+
+    fetch(local_url + 'users/' + user.id, {
         method: 'DELETE',
-        headers: {
-            'x-auth': JSON.parse(sessionStorage.user).password
-        }
+        headers: authHeaders(false)
     })
-        .then(response => {
-            if (!response.ok) alert("Fallo al eliminar");
-            return response.json();
-        })
-        .then(data => {
-            console.log('Usuario eliminado con éxito:', data);
+        .then(async response => {
+            if (!response.ok) {
+                alert(await response.text() || "No se pudo eliminar el usuario");
+                return;
+            }
+            alert("Usuario eliminado");
+            // Sin esto, validateLogin nos regresaria a home con un usuario que ya no existe
+            sessionStorage.clear();
             window.location.href = local_url;
         })
-        .catch(error => {
-            console.error('Error al eliminar:', error.message);
-        })
+        .catch(err => console.error("Error al eliminar usuario: ", err));
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-    let formRegister = document.getElementById('formRegister');
-    let formLogin = document.getElementById('formLogin');
-    let formUpdate = document.getElementById('formUpdate');
-    let modal = document.getElementById('edicion');
-    // Verificar si existen los formularios en la página actual antes de agregar eventos 
-    if (formRegister) {
-        formRegister.addEventListener('submit', register);
-    }
-    if (formLogin) {
-        formLogin.addEventListener('submit', login);
-    }
-    if (modal) {
-        modal.addEventListener('shown.bs.modal', populateModal);
-        formUpdate.addEventListener('submit', actualizar);
-    }
+// ===================== INIT =====================
+// Se ejecuta al entrar a cualquier pagina y despues de cada cambio (crear/editar/eliminar).
+async function init() {
+    if (!sessionStorage.user) return;
+    let user = getCurrentUser();
+
+    // El widget del nombre solo existe en home
+    let userNameWidget = document.getElementById('userNameWidget');
+    if (userNameWidget) userNameWidget.innerText = user.name;
+
+    // Primero las etiquetas (las tareas las necesitan para pintar nombre y color)
+    if (typeof loadTags === 'function') await loadTags();
+    if (typeof loadTasks === 'function') loadTasks();
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    let formLogin = document.getElementById('formLogin'),
+        formRegister = document.getElementById('formRegister'),
+        modalEdit = document.getElementById('modalEdit'),
+        formEditUser = document.getElementById('formEditUser'),
+        btnConfirmDeleteUser = document.getElementById('btnConfirmDeleteUser');
+
+    // Cada pagina tiene distintos elementos: validar que existan antes del listener
+    if (formLogin) formLogin.addEventListener('submit', login);
+    if (formRegister) formRegister.addEventListener('submit', register);
+    // show.bs.modal (antes de que se vea) para que los campos ya esten llenos al abrir
+    if (modalEdit) modalEdit.addEventListener('show.bs.modal', populateModal);
+    if (formEditUser) formEditUser.addEventListener('submit', updateUser);
+    if (btnConfirmDeleteUser) btnConfirmDeleteUser.addEventListener('click', deleteUser);
+
     init();
 });

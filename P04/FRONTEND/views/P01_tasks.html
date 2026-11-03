@@ -1,28 +1,26 @@
 <!doctype html>
-<html lang="en" data-bs-theme="dark">
+<html lang="es" data-bs-theme="dark">
 
 <head>
     <title>Tasks</title>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-
     <!-- Bootstrap CSS v5.3.8 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous" />
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="../views/Estilos.css">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
+    <!-- env.js AL INICIO: valida la sesion antes de cargar la pagina -->
+    <script src="../controllers/env.js"></script>
 </head>
 
 <body class="fondo">
     <header>
-        <!-- place navbar here -->
         <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-            <div class="container-fluid justify-content-center align-items-center gap-3">
-                <a class="navbar-brand " href="home.html">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="home.html">
                     <img src="https://i.pinimg.com/736x/ac/13/74/ac137456b996efec340292a585eb6dc7.jpg" alt="Avatar Logo"
                         style="width:40px;" class="rounded-pill">
                 </a>
@@ -30,206 +28,220 @@
                     data-bs-target="#collapsibleNavbar">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse flex-grow-0 align-items-center gap-3" id="collapsibleNavbar">
-                    <a href="http://localhost:3000/tasks.html"><span class="navbar-text">Tareas</span></a>
+                <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                    <a href="tasks.html"><span class="navbar-text">Tareas</span></a>
                     <div class="dropdown">
-                        <button type="button" class="btn btn dropdown-toggle" data-bs-toggle="dropdown">
+                        <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown">
                             Etiquetas
                         </button>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" onclick="alert('Diste click en Salud ')">Salud</a></li>
-                            <li><a class="dropdown-item" onclick="alert('Diste click en Proyectos ')">Proyectos</a></li>
-                            <li><a class="dropdown-item" onclick="alert('Diste click en Higiene ')">Higiene</a></li>
-                            <li><a class="dropdown-item" onclick="alert('Diste click en Trabajo ')">Trabajo</a></li>
-                            <li><button type="button" class="btn" data-bs-toggle="modal"
-                                    data-bs-target="#modalEtiqueta"><i class='fas fa-plus'
-                                        style='font-size:14px'></i>Nueva etiqueta</button></li>
+                        <!-- Las etiquetas se agregan desde tags_controller.js -->
+                        <ul class="dropdown-menu" id="dropdownList">
+                            <li id="newTagItem">
+                                <button type="button" class="dropdown-item" onclick="newTag()">
+                                    <i class="fas fa-plus" style="font-size:14px"></i> Nueva etiqueta
+                                </button>
+                            </li>
                         </ul>
                     </div>
-                    <form class="d-flex">
+                    <form class="d-flex ms-auto">
                         <input type="search" class="form-control me-2" placeholder="Buscar">
                         <button type="button" class="btn btn-outline-success">Buscar</button>
                     </form>
 
-                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#myModal">
-                        <i class='fas fa-sign-out-alt'
-                            style='font-size:24px;color:white; cursor: pointer;margin-left: 10px; margin-right: 10px;'
-                            title="Cerrar Sesión"></i>
+                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#myModal"
+                        title="Cerrar Sesión">
+                        <i class="fas fa-sign-out-alt" style="font-size:24px;color:white;"></i>
                     </button>
-                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#edicion">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white"
-                            class="bi bi-gear-wide-connected" viewBox="0 0 16 16">
-                            <path
-                                d="M7.068.727c.243-.97 1.62-.97 1.864 0l.071.286a.96.96 0 0 0 1.622.434l.205-.211c.695-.719 1.888-.03 1.613.931l-.08.284a.96.96 0 0 0 1.187 1.187l.283-.081c.96-.275 1.65.918.931 1.613l-.211.205a.96.96 0 0 0 .434 1.622l.286.071c.97.243.97 1.62 0 1.864l-.286.071a.96.96 0 0 0-.434 1.622l.211.205c.719.695.03 1.888-.931 1.613l-.284-.08a.96.96 0 0 0-1.187 1.187l.081.283c.275.96-.918 1.65-1.613.931l-.205-.211a.96.96 0 0 0-1.622.434l-.071.286c-.243.97-1.62.97-1.864 0l-.071-.286a.96.96 0 0 0-1.622-.434l-.205.211c-.695.719-1.888.03-1.613-.931l.08-.284a.96.96 0 0 0-1.186-1.187l-.284.081c-.96.275-1.65-.918-.931-1.613l.211-.205a.96.96 0 0 0-.434-1.622l-.286-.071c-.97-.243-.97-1.62 0-1.864l.286-.071a.96.96 0 0 0 .434-1.622l-.211-.205c-.719-.695-.03-1.888.931-1.613l.284.08a.96.96 0 0 0 1.187-1.186l-.081-.284c-.275-.96.918-1.65 1.613-.931l.205.211a.96.96 0 0 0 1.622-.434zM12.973 8.5H8.25l-2.834 3.779A4.998 4.998 0 0 0 12.973 8.5m0-1a4.998 4.998 0 0 0-7.557-3.779l2.834 3.78zM5.048 3.967l-.087.065zm-.431.355A4.98 4.98 0 0 0 3.002 8c0 1.455.622 2.765 1.615 3.678L7.375 8zm.344 7.646.087.065z" />
-                        </svg>
+                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#modalEdit"
+                        title="Editar usuario">
+                        <i class="fas fa-gear" style="font-size:24px;color:white;"></i>
                     </button>
                 </div>
             </div>
         </nav>
     </header>
     <main>
-        <!-- Modal editar usuario -->
-        <div class="modal modal-sm" id="edicion">
-            <div class="modal-dialog">
+        <!-- ===================== MODALES ===================== -->
+
+        <!-- Modal cerrar sesion -->
+        <div class="modal fade" id="myModal" tabindex="-1">
+            <div class="modal-dialog modal-sm">
                 <div class="modal-content">
-                    <!-- Modal Header -->
-                    <div class="modal-header">
-                        <h4 class="modal-title">Editar usuario</h4>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                    </div>
-                    <!-- Modal body -->
-                    <div class="modal-body">
-                        <form id="formUpdate" action="">
-                            Nombre
-                            <br>
-                            <input type="text" name="name" class="form-control" id="nombre" required>
-                            Correo
-                            <br>
-                            <input type="email" name="email" class="form-control" id="correo" required>
-                            Contraseña
-                            <br>
-                            <input type="text" name="password" class="form-control" id="contrasena" required>
-                            <br>
-                            <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                data-bs-target="#eliminar">Eliminar</button>
-
-                            <button type="submit" class="btn btn-primary" onClick="actualizar">Guardar Cambios</button>
-
-                        </form>
-
-
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Modal eliminar usuario -->
-        <div class="modal modal-sm" id="eliminar">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <!-- Modal Header -->
-                    <div class="modal-header">
-                        <h4 class="modal-title">Eliminar usuario</h4>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                    </div>
-                    <!-- Modal body -->
-                    <div class="modal-body">
-                        ¿Esta seguro de quere eliminar este usuario?
-                    </div>
-                    <!-- Modal footer -->
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-danger" onClick="eliminar()">Aceptar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--Codigo del Modal Para Cerrar Sesion-->
-        <div class="modal modal-sm" id="myModal">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <!-- Modal Header -->
                     <div class="modal-header">
                         <h4 class="modal-title">Cerrar Sesión</h4>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
-                    <!-- Modal body -->
                     <div class="modal-body">
-                        ¿Esta seguro de querer cerrar la sesión?
+                        ¿Está seguro de querer cerrar la sesión?
                     </div>
-                    <!-- Modal footer -->
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-
-                        <button type="button" class="btn btn-danger" onClick="logout()">Aceptar</button>
-
+                        <button type="button" class="btn btn-danger" onclick="logout()">Aceptar</button>
                     </div>
                 </div>
             </div>
         </div>
-        <!--Codigo del Modal de etiqueta-->
-        <div class="modal modal-sm" id="modalEtiqueta">
-            <div class="modal-dialog">
+
+        <!-- Modal crear / editar etiqueta (el mismo modal sirve para ambas) -->
+        <div class="modal fade" id="modalEtiqueta" tabindex="-1">
+            <div class="modal-dialog modal-sm">
                 <div class="modal-content">
-                    <!-- Modal Header -->
+                    <form id="formTag" action="">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="tagModalTitle">Nueva Etiqueta</h4>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            <input type="hidden" id="tag_id" name="id">
+                            <label for="tag_name" class="form-label">Nombre</label>
+                            <input type="text" id="tag_name" name="name" class="form-control mb-3"
+                                placeholder="Deporte" required>
+                            <label for="tag_color" class="form-label">Color</label>
+                            <input type="color" id="tag_color" name="color" class="form-control form-control-color w-100"
+                                value="#0d6efd" required>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger d-none me-auto" id="tagDeleteBtn">Eliminar</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-primary" id="tagSubmitBtn">Crear Etiqueta</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal editar usuario -->
+        <div class="modal fade" id="modalEdit" tabindex="-1">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <form id="formEditUser" action="">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Editar Usuario</h4>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            <label for="name_field" class="form-label">Nombre</label>
+                            <input type="text" name="name" class="form-control mb-3" id="name_field" required>
+                            <label for="email_field" class="form-label">Correo</label>
+                            <input type="email" name="email" class="form-control mb-3" id="email_field" required>
+                            <label for="password_field" class="form-label">Contraseña</label>
+                            <input type="password" name="password" class="form-control" id="password_field"
+                                minlength="8" required>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                data-bs-target="#modalDeleteUser">Eliminar</button>
+                            <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal eliminar usuario -->
+        <div class="modal fade" id="modalDeleteUser" tabindex="-1">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title">Nueva Etiqueta</h4>
+                        <h4 class="modal-title">Eliminar Usuario</h4>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
-                    <!-- Modal body -->
                     <div class="modal-body">
-                        <form>
-                            Nombre
-                            <br>
-                            <input type="text" class="form-control" placeholder="Deporte" required>
-                            <br>
-                            Color
-                            <br>
-                            <input type="color" class="form-control" required>
-                            <br>
-                        </form>
+                        ¿Seguro que desea eliminar su usuario?
                     </div>
-                    <!-- Modal footer -->
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-primary"
-                            onclick="alert('Etiqueta creada con exito ')">Crear Etiqueta</button>
+                        <button type="button" class="btn btn-primary" id="btnConfirmDeleteUser">Aceptar</button>
                     </div>
                 </div>
             </div>
         </div>
-        <!--Codigo del Modal de tarea-->
-        <div class="modal modal-sm" id="modalTarea">
-            <div class="modal-dialog">
+
+        <!-- Modal nueva tarea -->
+        <div class="modal fade" id="modalTarea" tabindex="-1">
+            <div class="modal-dialog modal-sm">
                 <div class="modal-content">
-                    <!-- Modal Header -->
+                    <form id="formNewTask" action="">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Nueva Tarea</h4>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            <label for="new_task_title" class="form-label">Nombre</label>
+                            <input type="text" id="new_task_title" name="title" class="form-control mb-3"
+                                placeholder="Ej. Estudiar DAW" required>
+                            <label for="new_task_date" class="form-label">Fecha</label>
+                            <input type="date" id="new_task_date" name="due_date" class="form-control mb-3" required>
+                            <label for="new_task_tag" class="form-label">Etiqueta</label>
+                            <!-- Opciones llenadas desde tags_controller.js -->
+                            <select id="new_task_tag" name="tag" class="form-select tag-select">
+                                <option value="">Sin etiqueta</option>
+                            </select>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-primary">Crear Tarea</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal editar tarea -->
+        <div class="modal fade" id="modalEditTask" tabindex="-1">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <form id="formEditTask" action="">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Editar tarea</h4>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            <input type="hidden" id="edit_task_id" name="id">
+                            <label for="edit_task_title" class="form-label">Nombre</label>
+                            <input type="text" id="edit_task_title" name="title" class="form-control mb-3" required>
+                            <label for="edit_task_date" class="form-label">Fecha</label>
+                            <input type="date" id="edit_task_date" name="due_date" class="form-control mb-3" required>
+                            <label for="edit_task_tag" class="form-label">Etiqueta</label>
+                            <select id="edit_task_tag" name="tag" class="form-select tag-select">
+                                <option value="">Sin etiqueta</option>
+                            </select>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal eliminar tarea -->
+        <div class="modal fade" id="modalDeleteTask" tabindex="-1">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title">Nueva Tarea</h4>
+                        <h4 class="modal-title">Eliminar Tarea</h4>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
-                    <!-- Modal body -->
                     <div class="modal-body">
-                        <form>
-                            Nombre
-                            <br>
-                            <input type="text" class="form-control" placeholder="Deporte" required>
-                            <br>
-                            Fecha
-                            <br>
-                            <input type="date" class="form-control" required>
-                            <br>
-                            Etiqueta
-                            <br>
-
-                            <div class="dropdown">
-                                <button type="button" class=" btn dropdown-toggle" data-bs-toggle="dropdown"
-                                    style="border-color: gray;">
-                                    Salud
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item">Salud</a></li>
-                                    <li><a class="dropdown-item">Proyectos</a></li>
-                                    <li><a class="dropdown-item">Higiene</a></li>
-                                    <li><a class="dropdown-item">Trabajo</a>
-                                    </li>
-
-                                </ul>
-                            </div>
-
-                            <br>
-                        </form>
+                        ¿Seguro que desea eliminar la tarea "<b id="deleteTaskName"></b>"?
                     </div>
-                    <!-- Modal footer -->
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-primary" onclick="alert('Tarea creada con exito ')">Crear
-                            Tarea</button>
+                        <button type="button" class="btn btn-danger" id="btnConfirmDeleteTask">Eliminar</button>
                     </div>
                 </div>
             </div>
         </div>
-        <!--Tabla-->
+
+        <!-- ===================== LISTA DE TAREAS ===================== -->
+        <!-- Filtro por etiqueta (misma logica que el widget de home) -->
+        <div id="tasksTagFilters" class="tag-filters-bar text-center"></div>
+
+        <p id="tasksEmpty" class="text-center text-light fs-5 mt-4 d-none"></p>
         <div class="table-responsive">
-            <table class="table table-primary table-striped table-hover">
+            <table class="table table-primary table-striped table-hover d-none" id="tasksTable">
                 <thead>
                     <tr>
                         <th scope="col"><i class="fa-solid fa-check"></i></th>
@@ -239,229 +251,14 @@
                         <th scope="col">Acciones</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td><input type="checkbox" checked></td>
-                        <td><del> Amigo ¿sabes? acabo de conocer, una mujer que aún es una niña</del></td>
-                        <td><span class="badge bg-primary">Salud</span></td>
-                        <td>07/09/2026</td>
-                        <td>
-                            <i class="fa-solid fa-pen"></i>
-                            <i class="fa-solid fa-trash"></i>
-                            <i class="fa-solid fa-tag"></i>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td> ¿Sabes? tiene los 17 aún, es jovencita y ya es mi novia</td>
-                        <td><span class="badge bg-primary">Tareas</span></td>
-                        <td>07/09/2026</td>
-                        <td>
-                            <i class="fa-solid fa-pen"></i>
-                            <i class="fa-solid fa-trash"></i>
-                            <i class="fa-solid fa-tag"></i>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" checked></td>
-                        <td><del> Amo su inocencia (17 años)</del></td>
-                        <td><span class="badge bg-success">Salud</span></td>
-                        <td>07/09/2026</td>
-                        <td>
-                            <i class="fa-solid fa-pen"></i>
-                            <i class="fa-solid fa-trash"></i>
-                            <i class="fa-solid fa-tag"></i>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td> Amo sus errores (17 años)</td>
-                        <td><span class="badge bg-secondary">Trabajo</span></td>
-                        <td>07/09/2026</td>
-                        <td>
-                            <i class="fa-solid fa-pen"></i>
-                            <i class="fa-solid fa-trash"></i>
-                            <i class="fa-solid fa-tag"></i>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td> Soy su primer novio (17 años)</td>
-                        <td><span class="badge bg-warning">Proyectos</span></td>
-                        <td>07/09/2026</td>
-                        <td>
-                            <i class="fa-solid fa-pen"></i>
-                            <i class="fa-solid fa-trash"></i>
-                            <i class="fa-solid fa-tag"></i>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td> Su primer amor</td>
-                        <td><span class="badge bg-danger">Higiene</span></td>
-                        <td>07/09/2026</td>
-                        <td>
-                            <i class="fa-solid fa-pen"></i>
-                            <i class="fa-solid fa-trash"></i>
-                            <i class="fa-solid fa-tag"></i>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" checked></td>
-                        <td><del> Es callada, tímida, inocente tiene la mirada</del></td>
-                        <td><span class="badge bg-dark">Pendientes</span></td>
-                        <td>07/09/2026</td>
-                        <td>
-                            <i class="fa-solid fa-pen"></i>
-                            <i class="fa-solid fa-trash"></i>
-                            <i class="fa-solid fa-tag"></i>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" checked></td>
-                        <td><del> Le tomo la mano y siente algo extraño</del></td>
-                        <td><span class="badge bg-primary">Trabajo</span></td>
-                        <td>07/09/2026</td>
-                        <td>
-                            <i class="fa-solid fa-pen"></i>
-                            <i class="fa-solid fa-trash"></i>
-                            <i class="fa-solid fa-tag"></i>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td> La abrazo, me abraza y empieza a temblar</td>
-                        <td><span class="badge bg-info">Proyectos</span></td>
-                        <td>07/09/2026</td>
-                        <td>
-                            <i class="fa-solid fa-pen"></i>
-                            <i class="fa-solid fa-trash"></i>
-                            <i class="fa-solid fa-tag"></i>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" checked></td>
-                        <td><del> A temblar de miedo diciéndome que nunca</del></td>
-                        <td><span class="badge bg-primary">Salud</span></td>
-                        <td>07/09/2026</td>
-                        <td>
-                            <i class="fa-solid fa-pen"></i>
-                            <i class="fa-solid fa-trash"></i>
-                            <i class="fa-solid fa-tag"></i>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td> Había sentido sensación así en su vida</td>
-                        <td><span class="badge bg-primary">Tareas</span></td>
-                        <td>07/09/2026</td>
-                        <td>
-                            <i class="fa-solid fa-pen"></i>
-                            <i class="fa-solid fa-trash"></i>
-                            <i class="fa-solid fa-tag"></i>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" checked></td>
-                        <td><del> Así en su vida</del></td>
-                        <td><span class="badge bg-success">Salud</span></td>
-                        <td>07/09/2026</td>
-                        <td>
-                            <i class="fa-solid fa-pen"></i>
-                            <i class="fa-solid fa-trash"></i>
-                            <i class="fa-solid fa-tag"></i>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td> Amo su inocencia (17 años)</td>
-                        <td><span class="badge bg-secondary">Trabajo</span></td>
-                        <td>07/09/2026</td>
-                        <td>
-                            <i class="fa-solid fa-pen"></i>
-                            <i class="fa-solid fa-trash"></i>
-                            <i class="fa-solid fa-tag"></i>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td> Amo sus errores (17 años)</td>
-                        <td><span class="badge bg-warning">Proyectos</span></td>
-                        <td>07/09/2026</td>
-                        <td>
-                            <i class="fa-solid fa-pen"></i>
-                            <i class="fa-solid fa-trash"></i>
-                            <i class="fa-solid fa-tag"></i>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td> Soy su primer novio (17 años)</td>
-                        <td><span class="badge bg-danger">Higiene</span></td>
-                        <td>07/09/2026</td>
-                        <td>
-                            <i class="fa-solid fa-pen"></i>
-                            <i class="fa-solid fa-trash"></i>
-                            <i class="fa-solid fa-tag"></i>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" checked></td>
-                        <td><del> Su primer amor</del></td>
-                        <td><span class="badge bg-dark">Pendientes</span></td>
-                        <td>07/09/2026</td>
-                        <td>
-                            <i class="fa-solid fa-pen"></i>
-                            <i class="fa-solid fa-trash"></i>
-                            <i class="fa-solid fa-tag"></i>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" checked></td>
-                        <td><del> Es callada, tímida, inocente tiene la mirada</del></td>
-                        <td><span class="badge bg-primary">Trabajo</span></td>
-                        <td>07/09/2026</td>
-                        <td>
-                            <i class="fa-solid fa-pen"></i>
-                            <i class="fa-solid fa-trash"></i>
-                            <i class="fa-solid fa-tag"></i>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td> Le tomo la mano y siente algo extraño</td>
-                        <td><span class="badge bg-info">Proyectos</span></td>
-                        <td>07/09/2026</td>
-                        <td>
-                            <i class="fa-solid fa-pen"></i>
-                            <i class="fa-solid fa-trash"></i>
-                            <i class="fa-solid fa-tag"></i>
-
-                        </td>
-                    </tr>
-
-                </tbody>
+                <tbody id="tasksTbody"></tbody>
             </table>
         </div>
-        <button type="button" class="btn2" data-bs-toggle="modal" data-bs-target="#modalTarea"><i class='fas fa-plus'
-                style='font-size:28px'></i></button>
+        <ul class="pagination justify-content-center" id="tasksPagination"></ul>
+
+        <button type="button" class="btn2" data-bs-toggle="modal" data-bs-target="#modalTarea" title="Nueva tarea">
+            <i class="fas fa-plus" style="font-size:28px"></i>
+        </button>
     </main>
     <footer>
         <!-- place footer here -->
@@ -470,13 +267,10 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
-    <!-- <script src="JavaScript.js"></script> -->
-    <script src="../controllers/env.js"></script>
+    <!--SCRIPTS (despues de Bootstrap porque usan bootstrap.Modal)-->
     <script src="../controllers/auth_controller.js"></script>
     <script src="../controllers/tasks_controller.js"></script>
     <script src="../controllers/tags_controller.js"></script>
 </body>
-</body>
-
 
 </html>
