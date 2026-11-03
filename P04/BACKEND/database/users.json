@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "name": "admin",
+    "name": "ADMIN",
     "email": "admin@gmail.com",
     "password": "admin12345678",
     "joined_at": "2026-11-01T05:04:18.044Z"
@@ -15,7 +15,7 @@
   },
   {
     "id": 3,
-    "name": "yusepe",
+    "name": "John Daniel Villa Velasquez ",
     "email": "yusepe@gmail.com",
     "password": "password3",
     "joined_at": "2026-11-02T20:53:05.968Z"
@@ -40,13 +40,6 @@
     "email": "sas@gmail.com",
     "password": "sas123456789",
     "joined_at": "2026-11-02T21:06:51.912Z"
-  },
-  {
-    "id": 7,
-    "name": "pepe",
-    "email": "pepe@gmail.com",
-    "password": "pepe123456",
-    "joined_at": "2026-11-02T21:08:41.817Z"
   },
   {
     "id": 8,
@@ -145,12 +138,5 @@
     "email": "wow@gmail.com",
     "password": "wow12345",
     "joined_at": "2026-11-02T21:43:15.838Z"
-  },
-  {
-    "id": 22,
-    "name": "John Villa",
-    "email": "admwerin@gmail.com",
-    "password": "holo12345",
-    "joined_at": "2026-11-02T21:43:59.016Z"
   }
 ]
