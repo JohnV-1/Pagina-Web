@@ -1,17 +1,10 @@
 [
   {
     "id": 1,
-    "name": "ADMIN",
+    "name": "admin123",
     "email": "admin@gmail.com",
-    "password": "admin12345678",
+    "password": "admin1234567",
     "joined_at": "2026-11-01T05:04:18.044Z"
-  },
-  {
-    "id": 2,
-    "name": "tata",
-    "email": "tata@gmail.com",
-    "password": "tata12345",
-    "joined_at": "2026-11-02T20:52:15.374Z"
   },
   {
     "id": 3,
@@ -131,12 +124,5 @@
     "email": "juan@gmail.com",
     "password": "juan123456",
     "joined_at": "2026-11-02T21:42:47.806Z"
-  },
-  {
-    "id": 21,
-    "name": "wow",
-    "email": "wow@gmail.com",
-    "password": "wow12345",
-    "joined_at": "2026-11-02T21:43:15.838Z"
   }
 ]

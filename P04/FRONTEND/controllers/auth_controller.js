@@ -105,10 +105,19 @@ function actualizar() {
             }
             return response.json();
         })
-        .then(user => {
-            sessionStorage.setItem('user', JSON.stringify(user));
-            window.location.href = local_url + 'home.html';
-            init();
+        .then(res => {
+            if (res) {
+                const updatedUser = res.user || res;
+                sessionStorage.setItem('user', JSON.stringify(updatedUser));
+                alert("Información de usuario actualizada correctamente");
+
+                const modalElement = document.getElementById('edicion');
+                if (modalElement && window.bootstrap) {
+                    const modalInstance = bootstrap.Modal.getInstance(modalElement);
+                    if (modalInstance) modalInstance.hide();
+                }
+                init();
+            }
         })
         .catch(err => {
             console.log("Aqui trono");
@@ -116,11 +125,6 @@ function actualizar() {
         })
 }
 function eliminar() {
-
-    //     ### Elimina usuario con ID = 1:
-    // DELETE http://localhost:3000/users/1
-    // x-auth: password1
-
     fetch('/users/' + JSON.parse(sessionStorage.user).id, {
         method: 'DELETE',
         headers: {
@@ -134,13 +138,10 @@ function eliminar() {
         .then(data => {
             console.log('Usuario eliminado con éxito:', data);
             window.location.href = local_url;
-           
-
         })
         .catch(error => {
             console.error('Error al eliminar:', error.message);
         })
-
 }
 
 document.addEventListener("DOMContentLoaded", () => {
