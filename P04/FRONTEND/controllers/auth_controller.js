@@ -82,8 +82,41 @@ function populateModal() {
     document.getElementById("contrasena").value = JSON.parse(sessionStorage.user).password;
     console.log(JSON.parse(sessionStorage.user).id)
 }
+// function init() {
+//     if (!sessionStorage.user) return;
+
+//     const user = JSON.parse(sessionStorage.user);
+
+//     const userNameDisplay = document.getElementById('userNameWidget');
+
+//     if (userNameDisplay) {
+//         userNameDisplay.innerText = user.name;
+//     }
+// }
 function init() {
-    console.log("Se actualizo chido")
+    if (!sessionStorage.user) return;
+    let user = JSON.parse(sessionStorage.user);
+    
+    let userNameWidget = document.getElementById('userNameWidget');
+    if (userNameWidget) {
+        userNameWidget.innerText = user.name;
+    }
+    
+    if (typeof loadTagsDropdown === 'function') {
+        loadTagsDropdown();
+    }
+    
+    if (typeof populateTaskTagSelect === 'function') {
+        populateTaskTagSelect();
+    }
+    
+    if (typeof renderHomeWidgets === 'function') {
+        renderHomeWidgets();
+    }
+    
+    if (typeof renderTasksPage === 'function') {
+        renderTasksPage();
+    }
 }
 function actualizar() {
     event.preventDefault();
@@ -160,5 +193,5 @@ document.addEventListener("DOMContentLoaded", () => {
         modal.addEventListener('shown.bs.modal', populateModal);
         formUpdate.addEventListener('submit', actualizar);
     }
-
+    init();
 });

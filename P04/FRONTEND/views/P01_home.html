@@ -106,38 +106,66 @@
                 </div>
             </div>
         </div>
-        <!--Codigo del Modal de etiqueta-->
-        <div class="modal modal-sm" id="modalEtiqueta">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <!-- Modal Header -->
-                    <div class="modal-header">
-                        <h4 class="modal-title">Nueva Etiqueta</h4>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                    </div>
-                    <!-- Modal body -->
-                    <div class="modal-body">
-                        <form>
-                            Nombre
-                            <br>
-                            <input type="text" class="form-control" placeholder="Deporte" required>
-                            <br>
-                            Color
-                            <br>
-                            <input type="color" class="form-control" required>
-                            <br>
-                        </form>
-                    </div>
-                    <!-- Modal footer -->
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-primary"
-                            onclick="alert('Etiqueta creada con exito ')">Crear Etiqueta</button>
-                    </div>
+        <!-- Modal de etiqueta -->
+<div class="modal modal-sm" id="modalEtiqueta">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="formNewTag">
+                <div class="modal-header">
+                    <h4 class="modal-title">Nueva Etiqueta</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
-            </div>
+                <div class="modal-body">
+                    Nombre
+                    <br>
+                    <input type="text" name="name" class="form-control" placeholder="Deporte" required>
+                    <br>
+                    Color
+                    <br>
+                    <input type="color" name="color" class="form-control" required>
+                    <br>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Crear Etiqueta</button>
+                </div>
+            </form>
         </div>
-
+    </div>
+</div>
+<!-- Modal de tarea -->
+<div class="modal modal-sm" id="modalTarea">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="formNewTask">
+                <div class="modal-header">
+                    <h4 class="modal-title">Nueva Tarea</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    Nombre
+                    <br>
+                    <input type="text" name="title" class="form-control" placeholder="Ej. Estudiar DAW" required>
+                    <br>
+                    Fecha
+                    <br>
+                    <input type="date" name="due_date" class="form-control" required>
+                    <br>
+                    Etiqueta
+                    <br>
+                    <select name="tag" class="form-select">
+                        <option value="">Sin Etiqueta</option>
+                    </select>
+                    <br>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Crear Tarea</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
         <!-- Modal editar usuario -->
         <div class="modal modal-sm" id="edicion">
             <div class="modal-dialog">
@@ -205,7 +233,7 @@ pendientes por etiqueta y Tareas Terminadas.-->
                                 src="https://i.pinimg.com/736x/ad/95/93/ad9593d4e16ce6b64b6a2fd08aff1441.jpg"
                                 alt="Card image">
                             <p>
-                                <strong>John Villa</strong><br>
+                                <strong id="userNameWidget">John Villa</strong><br>
                                 <strong>Tareas terminadas hoy:</strong> 67 tareas <br>
                                 <strong>Tareas pendientes de hoy:</strong> 13 tareas
                             </p>

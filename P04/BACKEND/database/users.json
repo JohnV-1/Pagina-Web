@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "name": "admin123",
+    "name": "alfonso",
     "email": "admin@gmail.com",
     "password": "admin1234567",
     "joined_at": "2026-11-01T05:04:18.044Z"
@@ -15,7 +15,7 @@
   },
   {
     "id": 4,
-    "name": "John Villa",
+    "name": "Patroclo",
     "email": "admin23@gmail.com",
     "password": "jaime23123",
     "joined_at": "2026-11-02T20:59:33.955Z"

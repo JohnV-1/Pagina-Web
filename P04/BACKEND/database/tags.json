@@ -10,5 +10,11 @@
     "name": "Proyecto",
     "color": "#0000FF",
     "id_user": 3
+  },
+  {
+    "id": 3,
+    "name": "T",
+    "color": "#6ac880",
+    "id_user": 4
   }
 ]
